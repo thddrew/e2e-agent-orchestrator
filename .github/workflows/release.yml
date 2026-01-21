@@ -23,6 +23,7 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+          scope: '@thddrew'
       
       - name: Install dependencies
         run: |
@@ -52,9 +53,10 @@ jobs:
           echo "✅ Version matches: $PACKAGE_VERSION"
       
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Create GitHub Release
         uses: actions/create-release@v1
