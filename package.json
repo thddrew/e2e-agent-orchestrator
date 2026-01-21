@@ -1,0 +1,49 @@
+{
+	"name": "@booking-platform/e2e-agent-orchestrator",
+	"version": "1.0.0",
+	"description": "Agent-first E2E testing orchestrator using Cursor agent + agent-browser",
+	"license": "MIT",
+	"type": "module",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"bin": {
+		"e2e-agent": "./bin/e2e-agent"
+	},
+	"files": [
+		"dist",
+		"bin",
+		"templates",
+		"README.md",
+		"CHANGELOG.md"
+	],
+	"scripts": {
+		"build": "tsc",
+		"prepublishOnly": "npm run build"
+	},
+	"keywords": [
+		"e2e",
+		"testing",
+		"agent",
+		"cursor",
+		"agent-browser",
+		"orchestrator"
+	],
+	"dependencies": {
+		"dotenv": "^16.4.5"
+	},
+	"peerDependencies": {
+		"agent-browser": "^0.6.0"
+	},
+	"peerDependenciesMeta": {
+		"agent-browser": {
+			"optional": true
+		}
+	},
+	"devDependencies": {
+		"@types/node": "^20.14.0",
+		"typescript": "^5.9.3"
+	},
+	"engines": {
+		"node": ">=18.20.2"
+	}
+}
