@@ -26,7 +26,11 @@
 	"homepage": "https://github.com/thddrew/e2e-agent-orchestrator#readme",
 	"scripts": {
 		"build": "tsc",
-		"prepublishOnly": "npm run build"
+		"prepublishOnly": "npm run build",
+		"release": "node scripts/release.js",
+		"release:patch": "npm run release patch",
+		"release:minor": "npm run release minor",
+		"release:major": "npm run release major"
 	},
 	"keywords": [
 		"e2e",

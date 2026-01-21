@@ -467,11 +467,56 @@ Future: We plan to add automated tests. Contributions welcome!
 
 ### Release Process
 
-1. Update version in `package.json`
-2. Update `CHANGELOG.md` with changes
-3. Commit and tag: `git tag v1.0.1`
-4. Push tags: `git push --tags`
-5. Publish: `npm publish --otp=<otp-code>`
+We use an automated release script that handles version bumping, changelog updates, building, and git tagging.
+
+#### Automated Release (Recommended)
+
+```bash
+# Patch release (1.0.0 -> 1.0.1)
+npm run release:patch
+
+# Minor release (1.0.0 -> 1.1.0)
+npm run release:minor
+
+# Major release (1.0.0 -> 2.0.0)
+npm run release:major
+```
+
+The release script will:
+1. ✅ Bump version in `package.json`
+2. ✅ Update `CHANGELOG.md` with new version entry
+3. ✅ Build the package
+4. ✅ Commit changes with release message
+5. ✅ Create and push git tag
+6. ✅ Push to GitHub
+
+After running the release script:
+1. Review and update `CHANGELOG.md` with actual changes
+2. If CHANGELOG was updated, amend the commit:
+   ```bash
+   git add CHANGELOG.md
+   git commit --amend --no-edit
+   git push --force-with-lease
+   ```
+3. Publish to npm (requires OTP):
+   ```bash
+   npm publish --otp=<your-otp-code>
+   ```
+
+#### GitHub Actions (Automatic Publishing)
+
+If you set up `NPM_TOKEN` secret in GitHub:
+1. Push a tag: `git push origin v1.0.1`
+2. GitHub Actions will automatically:
+   - Build the package
+   - Verify version matches tag
+   - Publish to npm
+   - Create GitHub release
+
+To set up automatic publishing:
+1. Generate npm token: https://www.npmjs.com/settings/YOUR_USERNAME/tokens
+2. Add secret to GitHub: Settings → Secrets → Actions → New repository secret
+3. Name: `NPM_TOKEN`, Value: your npm token
 
 ## Contributing
 
