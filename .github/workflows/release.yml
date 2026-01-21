@@ -23,6 +23,7 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
+          always-auth: true
       
       - name: Install dependencies
         run: |
@@ -51,16 +52,10 @@ jobs:
           fi
           echo "✅ Version matches: $PACKAGE_VERSION"
       
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > $HOME/.npmrc
-          chmod 600 $HOME/.npmrc
-          echo "✅ npmrc configured"
-          cat $HOME/.npmrc | sed 's/:_authToken=.*/:_authToken=***/' || true
-      
       - name: Verify npm authentication
-        run: |
-          npm whoami || echo "⚠️  npm whoami failed, but continuing..."
+        run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Publish to npm
         run: npm publish --access public
