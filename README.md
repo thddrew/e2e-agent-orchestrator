@@ -370,3 +370,5 @@ MIT
 ## Contributing
 
 Contributions welcome! Please open an issue or submit a pull request.
+
+**Repository:** https://github.com/thddrew/e2e-agent-orchestrator
