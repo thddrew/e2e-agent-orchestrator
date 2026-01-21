@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2024-01-15
 
+## [1.0.1] - 2026-01-21
+
+### Added
+- Automated release process with release scripts
+- GitHub Actions workflows for CI and automated publishing
+- Comprehensive developer documentation in README
+
+### Changed
+- Require Node.js >=24.0.0 (upgraded from >=18.20.2)
+- Improved release workflow documentation
+
+
 ### Added
 - Initial release of E2E Agent Orchestrator
 - CLI tool (`e2e-agent`) for running tests
