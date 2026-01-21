@@ -367,8 +367,125 @@ e2e-agent run --debug
 
 MIT
 
+## Development
+
+### Prerequisites
+
+- Node.js >=18.20.2 or >=20.9.0
+- npm or Bun
+- TypeScript knowledge (for contributing)
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/thddrew/e2e-agent-orchestrator.git
+cd e2e-agent-orchestrator
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Build the package:
+```bash
+npm run build
+```
+
+### Project Structure
+
+```
+e2e-agent-orchestrator/
+├── src/                    # Source TypeScript files
+│   ├── index.ts           # Main entry point (programmatic API)
+│   ├── cli.ts             # CLI interface
+│   ├── orchestrator.ts    # Core orchestrator logic
+│   ├── worker.ts          # Worker that calls agent
+│   ├── utils.ts           # Utility functions
+│   ├── config.ts          # Configuration management
+│   └── types.ts           # TypeScript interfaces
+├── bin/                    # CLI executable
+│   └── e2e-agent.js       # CLI entry point
+├── templates/              # Template files
+│   └── spec.template.ts   # Test spec template
+├── dist/                   # Compiled output (generated)
+└── package.json           # Package configuration
+```
+
+### Development Workflow
+
+1. **Make changes** to files in `src/`
+2. **Build** the package: `npm run build`
+3. **Test** your changes locally by linking the package:
+   ```bash
+   npm link
+   # In another project:
+   npm link e2e-agent-orchestrator
+   ```
+4. **Test the CLI** directly:
+   ```bash
+   node bin/e2e-agent.js --help
+   ```
+
+### Building
+
+The package uses TypeScript and compiles to ES modules:
+
+```bash
+npm run build
+```
+
+This compiles `src/` to `dist/` with type definitions.
+
+### Testing
+
+Currently, testing is done manually by:
+1. Building the package
+2. Linking it in a test project
+3. Running the CLI or using the programmatic API
+
+Future: We plan to add automated tests. Contributions welcome!
+
+### Code Style
+
+- TypeScript with strict mode enabled
+- ES modules (ES2022)
+- Follow existing code patterns
+- Use meaningful variable and function names
+- Add JSDoc comments for public APIs
+
+### Making Changes
+
+1. **Fork** the repository
+2. **Create a branch** for your feature: `git checkout -b feature/your-feature`
+3. **Make your changes** and test them
+4. **Build** the package: `npm run build`
+5. **Commit** with clear messages: `git commit -m "Add feature X"`
+6. **Push** to your fork: `git push origin feature/your-feature`
+7. **Open a Pull Request** on GitHub
+
+### Release Process
+
+1. Update version in `package.json`
+2. Update `CHANGELOG.md` with changes
+3. Commit and tag: `git tag v1.0.1`
+4. Push tags: `git push --tags`
+5. Publish: `npm publish --otp=<otp-code>`
+
 ## Contributing
 
 Contributions welcome! Please open an issue or submit a pull request.
 
+**Before contributing:**
+- Check existing issues to avoid duplicates
+- Discuss major changes in an issue first
+- Follow the development workflow above
+- Ensure your code builds successfully
+- Test your changes thoroughly
+
 **Repository:** https://github.com/thddrew/e2e-agent-orchestrator
+
+**Issues:** https://github.com/thddrew/e2e-agent-orchestrator/issues
+
+**Pull Requests:** https://github.com/thddrew/e2e-agent-orchestrator/pulls
