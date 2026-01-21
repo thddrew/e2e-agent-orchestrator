@@ -33,7 +33,7 @@ npm install --save-dev agent-browser
 
 ### System Requirements
 
-- **Node.js**: >=18.20.2 or >=20.9.0
+- **Node.js**: >=24.0.0
 - **Cursor CLI**: Install with `curl https://cursor.com/install -fsS | bash`
 - **CURSOR_API_KEY**: Set as environment variable
 
@@ -371,7 +371,7 @@ MIT
 
 ### Prerequisites
 
-- Node.js >=18.20.2 or >=20.9.0
+- Node.js >=24.0.0
 - npm or Bun
 - TypeScript knowledge (for contributing)
 
