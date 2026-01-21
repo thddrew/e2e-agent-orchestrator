@@ -1,6 +1,6 @@
 {
 	"name": "e2e-agent-orchestrator",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Agent-first E2E testing orchestrator using Cursor agent + agent-browser",
 	"license": "MIT",
 	"type": "module",
