@@ -51,11 +51,13 @@ jobs:
           fi
           echo "✅ Version matches: $PACKAGE_VERSION"
       
+      - name: Configure npm authentication
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "registry=https://registry.npmjs.org/" >> ~/.npmrc
+      
       - name: Publish to npm
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       
       - name: Create GitHub Release
         uses: actions/create-release@v1
