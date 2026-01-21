@@ -70,7 +70,7 @@ async function init() {
 		const configContent = `/**
  * E2E Test Orchestrator Configuration
  */
-import type { E2EConfig } from '@booking-platform/e2e-agent-orchestrator';
+import type { E2EConfig } from 'e2e-agent-orchestrator';
 
 const config: E2EConfig = {
 	specsDir: 'e2e/specs',

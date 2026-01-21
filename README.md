@@ -14,13 +14,13 @@ Agent-first E2E testing orchestrator using Cursor agent + agent-browser. This pa
 ## Installation
 
 ```bash
-npm install @booking-platform/e2e-agent-orchestrator
+npm install e2e-agent-orchestrator
 ```
 
 Or using Bun:
 
 ```bash
-bun add @booking-platform/e2e-agent-orchestrator
+bun add e2e-agent-orchestrator
 ```
 
 ### Peer Dependencies
@@ -113,7 +113,7 @@ Configuration is loaded with the following priority (highest to lowest):
 
 ```typescript
 // e2e.config.ts
-import type { E2EConfig } from '@booking-platform/e2e-agent-orchestrator';
+import type { E2EConfig } from 'e2e-agent-orchestrator';
 
 const config: E2EConfig = {
 	specsDir: 'e2e/specs',
@@ -178,7 +178,7 @@ e2e-agent init
 Use the package as a library in your code:
 
 ```typescript
-import { runOrchestrator, runWorker, loadConfig } from '@booking-platform/e2e-agent-orchestrator';
+import { runOrchestrator, runWorker, loadConfig } from 'e2e-agent-orchestrator';
 
 // Load configuration
 const config = await loadConfig(process.cwd());
