@@ -51,7 +51,7 @@ Examples:
   e2e-agent run --debug            # Run all specs with debug output
   e2e-agent init                   # Initialize config and template
 
-For more information, see: https://github.com/your-org/e2e-agent-orchestrator
+For more information, see: https://github.com/thddrew/e2e-agent-orchestrator
 `);
 }
 
