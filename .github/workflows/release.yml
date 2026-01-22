@@ -69,6 +69,16 @@ jobs:
             npm publish --access public
           fi
       
+      - name: Deprecate old v1.x.x versions
+        if: startsWith(steps.version.outputs.version, '0.')
+        run: |
+          echo "📢 Deprecating old v1.x.x versions..."
+          DEPRECATION_MSG="This version is deprecated. Please use v0.x.x instead. See https://github.com/${{ github.repository }} for details."
+          npm deprecate e2e-agent-orchestrator@1.0.0 "$DEPRECATION_MSG" || true
+          npm deprecate e2e-agent-orchestrator@1.0.8 "$DEPRECATION_MSG" || true
+          npm deprecate e2e-agent-orchestrator@1.0.9 "$DEPRECATION_MSG" || true
+          echo "✅ Deprecation complete"
+      
       - name: Create GitHub Release
         uses: actions/create-release@v1
         env:
