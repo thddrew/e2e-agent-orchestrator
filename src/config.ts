@@ -21,13 +21,10 @@ const __dirname = path.dirname(__filename);
 const DEFAULT_CONFIG: E2EConfig = {
 	specsDir: 'e2e/specs',
 	maxWorkers: 5,
-	maxSteps: 20,
 	maxRetries: 3,
-	timeout: 180000, // 3 minutes
+	timeout: 300000, // 5 minutes
 	reportDir: 'docs/e2e-test-results',
 	baseUrl: 'http://localhost:4000',
-	healthCheckEndpoint: '/health',
-	waitForApp: true,
 	saveLlmLogs: false,
 };
 
@@ -107,14 +104,11 @@ function loadConfigFromEnv(): Partial<E2EConfig> {
 
 	if (process.env.E2E_SPECS_DIR) config.specsDir = process.env.E2E_SPECS_DIR;
 	if (process.env.MAX_WORKERS) config.maxWorkers = parseInt(process.env.MAX_WORKERS, 10);
-	if (process.env.MAX_STEPS) config.maxSteps = parseInt(process.env.MAX_STEPS, 10);
 	if (process.env.MAX_RETRIES) config.maxRetries = parseInt(process.env.MAX_RETRIES, 10);
 	if (process.env.TIMEOUT) config.timeout = parseInt(process.env.TIMEOUT, 10);
 	if (process.env.E2E_REPORT_DIR) config.reportDir = process.env.E2E_REPORT_DIR;
 	if (process.env.PLAYWRIGHT_CONFIG) config.playwrightConfig = process.env.PLAYWRIGHT_CONFIG;
 	if (process.env.BASE_URL) config.baseUrl = process.env.BASE_URL;
-	if (process.env.HEALTH_CHECK_ENDPOINT) config.healthCheckEndpoint = process.env.HEALTH_CHECK_ENDPOINT;
-	if (process.env.WAIT_FOR_APP !== undefined) config.waitForApp = process.env.WAIT_FOR_APP !== 'false';
 	if (process.env.SAVE_LLM_LOGS !== undefined) config.saveLlmLogs = process.env.SAVE_LLM_LOGS === 'true';
 
 	return config;

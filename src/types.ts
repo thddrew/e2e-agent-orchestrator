@@ -47,13 +47,10 @@ export interface OrchestratorResults {
 export interface E2EConfig {
 	specsDir: string;
 	maxWorkers: number;
-	maxSteps: number; // Max LLM debugging steps per test failure
 	maxRetries: number; // Max test retries (after applying fix)
 	timeout: number;
 	reportDir: string;
 	playwrightConfig?: string;
 	baseUrl: string;
-	healthCheckEndpoint: string;
-	waitForApp: boolean;
 	saveLlmLogs: boolean; // Save LLM prompts/responses to files for analysis
 }

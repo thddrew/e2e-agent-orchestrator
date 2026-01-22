@@ -77,32 +77,6 @@ export async function loadSpec(specPath: string, projectRoot: string = process.c
 }
 
 /**
- * Check if app is accessible
- */
-export async function checkAppHealth(baseUrl: string, endpoint: string = '/health'): Promise<boolean> {
-	try {
-		const url = `${baseUrl}${endpoint}`;
-		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-		const response = await fetch(url, {
-			method: 'GET',
-			signal: controller.signal,
-		});
-
-		clearTimeout(timeoutId);
-		return response.ok;
-	} catch (error) {
-		if (error instanceof Error && error.name === 'AbortError') {
-			console.error(`App health check timeout for ${baseUrl}${endpoint}`);
-		} else {
-			console.error(`App health check failed for ${baseUrl}${endpoint}:`, error);
-		}
-		return false;
-	}
-}
-
-/**
  * Detect environment (Docker, CI, etc.)
  */
 export function detectEnvironment(): {

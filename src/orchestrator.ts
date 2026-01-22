@@ -5,7 +5,7 @@
  */
 
 import * as path from 'path';
-import { discoverSpecs, checkAppHealth, ensureReportDir, generateReportFilename } from './utils.js';
+import { discoverSpecs, ensureReportDir, generateReportFilename } from './utils.js';
 import { runWorker } from './worker.js';
 import type { E2EConfig, TestResult, OrchestratorResults } from './types.js';
 
@@ -259,21 +259,6 @@ export async function runOrchestrator(
 
 	console.log('🎯 E2E Test Orchestrator');
 	console.log('========================\n');
-
-	// Check app health
-	if (config.waitForApp) {
-		console.log(`🔍 Checking app health at ${config.baseUrl}${config.healthCheckEndpoint}...`);
-		const isHealthy = await checkAppHealth(config.baseUrl, config.healthCheckEndpoint);
-
-		if (!isHealthy) {
-			console.error(`❌ App is not accessible at ${config.baseUrl}`);
-			console.error('Please ensure the app is running before running tests.');
-			console.error(`\n💡 Tip: Start the app with: bun run dev`);
-			throw new Error(`App is not accessible at ${config.baseUrl}`);
-		}
-
-		console.log(`✅ App is accessible at ${config.baseUrl}\n`);
-	}
 
 	// Discover test specs
 	console.log(`📋 Discovering test specs in ${config.specsDir}...`);

@@ -8,7 +8,6 @@ Agent-first E2E testing orchestrator using Cursor agent + agent-browser. This pa
 - 🚀 **Parallel Execution**: Run multiple test specs in parallel with configurable workers
 - 📊 **Progress Tracking**: Real-time progress updates and detailed test reports
 - ⚙️ **Flexible Configuration**: Support for config files, environment variables, and CLI arguments
-- 🔍 **Health Checks**: Automatic app health verification before running tests
 - 📝 **Declarative Specs**: Write tests as simple declarative specifications, no code needed
 
 ## Installation
@@ -118,13 +117,10 @@ import type { E2EConfig } from 'e2e-agent-orchestrator';
 const config: E2EConfig = {
 	specsDir: 'e2e/specs',
 	maxWorkers: 5,
-	maxSteps: 20,
 	maxRetries: 3,
-	timeout: 180000, // 3 minutes
+	timeout: 300000, // 5 minutes
 	reportDir: 'docs/e2e-test-results',
 	baseUrl: process.env.BASE_URL || 'http://localhost:4000',
-	healthCheckEndpoint: '/health',
-	waitForApp: true,
 	saveLlmLogs: false,
 };
 
@@ -137,10 +133,8 @@ export default config;
 - `BASE_URL` - Base URL of the app to test (default: `http://localhost:4000`)
 - `E2E_SPECS_DIR` - Directory containing test specs (default: `e2e/specs`)
 - `MAX_WORKERS` - Maximum parallel workers (default: `5`)
-- `TIMEOUT` - Test timeout in milliseconds (default: `180000`)
+- `TIMEOUT` - Test timeout in milliseconds (default: `300000`)
 - `E2E_REPORT_DIR` - Directory for test reports (default: `docs/e2e-test-results`)
-- `HEALTH_CHECK_ENDPOINT` - Health check path (default: `/health`)
-- `WAIT_FOR_APP` - Wait for app health check (default: `true`)
 - `SAVE_LLM_LOGS` - Save LLM prompts/responses (default: `false`)
 
 ## CLI Usage
@@ -346,10 +340,6 @@ curl https://cursor.com/install -fsS | bash
 ```bash
 export CURSOR_API_KEY=your_api_key_here
 ```
-
-### App Not Accessible
-
-Ensure your app is running and accessible at the configured `baseUrl`. The orchestrator will check the health endpoint before running tests.
 
 ### Tests Timing Out
 

@@ -43,7 +43,6 @@ Environment Variables:
   BASE_URL            Base URL of the app to test (default: http://localhost:4000)
   E2E_SPECS_DIR       Directory containing test specs (default: e2e/specs)
   MAX_WORKERS         Maximum parallel workers (default: 5)
-  WAIT_FOR_APP        Wait for app health check (default: true)
 
 Examples:
   e2e-agent run                    # Run all specs
@@ -75,13 +74,10 @@ import type { E2EConfig } from 'e2e-agent-orchestrator';
 const config: E2EConfig = {
 	specsDir: 'e2e/specs',
 	maxWorkers: 5,
-	maxSteps: 20,
 	maxRetries: 3,
-	timeout: 180000, // 3 minutes
+	timeout: 300000, // 5 minutes
 	reportDir: 'docs/e2e-test-results',
 	baseUrl: process.env.BASE_URL || 'http://localhost:4000',
-	healthCheckEndpoint: '/health',
-	waitForApp: true,
 	saveLlmLogs: false,
 };
 
