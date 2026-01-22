@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2024-01-15
 
+## [0.1.0] - 2026-01-22
+
+### Changed
+- Switch versioning scheme from v1.x.x to v0.x.x
+- Remove healthcheck functionality (not required)
+- Remove unused maxSteps configuration
+- Increase default timeout from 3 minutes to 5 minutes
+- Fix missing checkAppHealth export in index.ts
+
+
 ## [1.0.8] - 2026-01-21
 
 ### Changed
