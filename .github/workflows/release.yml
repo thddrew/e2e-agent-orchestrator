@@ -58,7 +58,16 @@ jobs:
         run: npm whoami
       
       - name: Publish to npm
-        run: npm publish --access public
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          # If version starts with 0., publish with 'next' tag to avoid conflicts with existing 1.x versions
+          if [[ "$VERSION" == 0.* ]]; then
+            echo "📦 Publishing v0.x.x version with 'next' tag..."
+            npm publish --access public --tag next
+          else
+            echo "📦 Publishing version as latest..."
+            npm publish --access public
+          fi
       
       - name: Create GitHub Release
         uses: actions/create-release@v1
