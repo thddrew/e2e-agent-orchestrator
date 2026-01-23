@@ -1,9 +1,8 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [published]
 
 jobs:
   release:
@@ -18,14 +17,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.release.tag_name }}
           fetch-depth: 0
       
-      - name: Extract version from tag
+      - name: Extract version from release tag
         id: version
         run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
+          # GitHub releases create tags, extract version from the release tag
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          VERSION=${TAG_NAME#v}
           echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
           echo "📦 Version: $VERSION"
+          echo "🏷️  Tag: $TAG_NAME"
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -69,14 +73,7 @@ jobs:
             npm publish --access public
           fi
       
-      - name: Create GitHub Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ steps.version.outputs.version }}
-          body: |
-            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
-          draft: false
-          prerelease: false
+      - name: Release already created
+        run: |
+          echo "✅ GitHub Release already created at: ${{ github.event.release.html_url }}"
+          echo "📝 Release notes: ${{ github.event.release.body }}"
